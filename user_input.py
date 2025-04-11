@@ -5,12 +5,14 @@
 def main():
     robot_battery_capacity = float(input("Please enter the Rover's battery capacity (kWh): "))
     robot_energy_consumption = float(input("Please enter rovers energy consumption per second (kWh): "))
-    robot_charge_locale = input("Please enter robot charge location: ")
+    robot_charge_locale = input("Please enter robot charge location x,y: ")
+    locale_split = robot_charge_locale.split(",")
+    robot_charge_locale = (int(locale_split[0]), int(locale_split[1]))
     time_to_wait = float(input("Please enter how long we must wait at a given data point (seconds): "))
     sensor_energy_consumption = float(input("Please enter energy consumed per second of scanning (kWh): "))
     sensor_range = float(input("Please enter the sensor range (meters): "))
     config_name = input("What would you like this configuration to be called?: ")
-    map_name = input("What map would you like to map to? (.pgm): ")
+    map_name = input("What map would you like to map to? (.png): ")
     not_done = True
     print("Please enter x,y coordinate of each data point, and 'B' when complete:")
     coord_list = []
@@ -30,6 +32,7 @@ def main():
         file.write(f"robot:\n")
         file.write(f"  battery_capacity: {robot_battery_capacity}\n")
         file.write(f"  energy_consumption: {robot_energy_consumption}\n")
+        file.write(f"  charge_location: {robot_charge_locale}\n")
         file.write(f"sensor:\n")
         file.write(f"  time_to_wait: {time_to_wait}\n")
         file.write(f"  energy_consuption: {sensor_energy_consumption}\n")
