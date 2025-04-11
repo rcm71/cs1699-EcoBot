@@ -1,0 +1,1 @@
+# configuration for robot motionmap_name: grid_output.txtrobot:  battery_capacity: 4.0  energy_consumption: 5.0sensor:  time_to_wait: 6.0  energy_consuption: 2.0  range: 4.0key_points:  -(4, 5)  -(6, 7)  -(3, 4)
