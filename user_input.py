@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 
-
 def main():
     robot_battery_capacity = float(input("Please enter the Rover's battery capacity (kWh): "))
     robot_energy_consumption = float(input("Please enter rovers energy consumption per second (kWh): "))
@@ -12,7 +11,7 @@ def main():
     sensor_energy_consumption = float(input("Please enter energy consumed per second of scanning (kWh): "))
     sensor_range = float(input("Please enter the sensor range (meters): "))
     config_name = input("What would you like this configuration to be called?: ")
-    map_name = input("What map would you like to map to? (.png): ")
+    map_path = input("What map would you like to map to? (grid.txt): ")
     not_done = True
     print("Please enter x,y coordinate of each data point, and 'B' when complete:")
     coord_list = []
@@ -26,9 +25,11 @@ def main():
         coord_list.append(coord)
     print(coord_list)
 
+
+
     with open(f"{config_name}.yaml", "w") as file:
         file.write("# configuration for robot motion")
-        file.write(f"\nmap_name: {map_name}\n")
+        file.write(f"\nmap_locale: {map_path}\n")
         file.write(f"robot:\n")
         file.write(f"  battery_capacity: {robot_battery_capacity}\n")
         file.write(f"  energy_consumption: {robot_energy_consumption}\n")
@@ -40,11 +41,6 @@ def main():
         file.write(f"key_points:\n")
         for coord in coord_list:
             file.write(f"  - {coord}\n")
-        
-    
-
-
-
 
 
 if __name__ == "__main__":
