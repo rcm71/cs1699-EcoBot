@@ -30,6 +30,7 @@ def main():
         file.write(f"robot:\n")
         file.write(f"  battery_capacity: {robot_battery_capacity}\n")
         file.write(f"  energy_consumption: {robot_energy_consumption}\n")
+        file.write(f"  charge_locale: {robot_charge_locale}\n")
         file.write(f"sensor:\n")
         file.write(f"  time_to_wait: {time_to_wait}\n")
         file.write(f"  energy_consuption: {sensor_energy_consumption}\n")

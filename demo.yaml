@@ -1,1 +1,14 @@
-# configuration for robot motionmap_name: grid_output.txtrobot:  battery_capacity: 4.0  energy_consumption: 5.0sensor:  time_to_wait: 6.0  energy_consuption: 2.0  range: 4.0key_points:  -(4, 5)  -(6, 7)  -(3, 4)
+# configuration for robot motion
+map_name: map_cleaned.pgm
+robot:
+  battery_capacity: 1000000.0
+  energy_consumption: 0.001
+  charge_locale: [250,125]
+sensor:
+  time_to_wait: 5.0
+  energy_consuption: 0.0002
+  range: 2.0
+key_points:
+  - [130, 80]
+  - [90, 140]
+  - [130, 160]
