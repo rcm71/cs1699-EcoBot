@@ -1,12 +1,12 @@
 # configuration for robot motion
-map_locale: map_grid.txt
+map_name: 4
 robot:
   battery_capacity: 5.0
   energy_consumption: 6.0
-  charge_location: (2, 3)
 sensor:
-  time_to_wait: 5.0
-  energy_consuption: 6.0
+  time_to_wait: 4.0
+  energy_consuption: 5.0
   range: 5.0
 key_points:
-  - (4, 5)
+  -(4, 5)
+  -(4, 6)
