@@ -1,21 +1,19 @@
 import numpy as np
-from PIL import Image
-import yaml
 
-def load_map(pgm_path, yaml_path):
-    # Load metadata
-    with open(yaml_path, 'r') as file:
-        metadata = yaml.safe_load(file)
+def load_map(matrix_txt_path, config_yaml_path):
+    # Load grid from .txt
+    with open(matrix_txt_path, "r") as f:
+        grid = [list(map(int, line.strip().split())) for line in f]
 
-    resolution = metadata["resolution"]
-    origin = metadata["origin"]
+    binary_grid = np.array(grid, dtype=np.uint8)
+    # 0 = walkable, 1 = obstacle
 
-    # Load PGM image as numpy array
-    image = Image.open(pgm_path)
-    image_array = np.array(image)
+    # Load tile size and origin from config
+    import yaml
+    with open(config_yaml_path, "r") as f:
+        config = yaml.safe_load(f)
 
-    # Convert image to binary grid: 1 = free, 0 = obstacle/unknown
-    binary_grid = np.zeros_like(image_array, dtype=np.uint8)
-    binary_grid[image_array > 254] = 1  # 255 = free (white)
+    resolution = config.get("tile_size", 1.0)
+    origin = tuple(config.get("robot", {}).get("charge_locale", [0, 0]))
 
     return binary_grid, resolution, origin

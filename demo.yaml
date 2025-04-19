@@ -1,14 +1,16 @@
 # configuration for robot motion
-map_name: map_cleaned.pgm
+map_name: map.pgm
+tile_size: 0.25
 robot:
-  battery_capacity: 1000000.0
+  battery_capacity: 1.0
   energy_consumption: 0.001
-  charge_locale: [250,125]
+  charge_locale: [15, 35]
 sensor:
   time_to_wait: 5.0
   energy_consuption: 0.0002
   range: 2.0
 key_points:
-  - [130, 80]
-  - [90, 140]
-  - [130, 160]
+  - [15, 5]
+  - [5, 35]
+  - [3, 40]
+  - [5, 45]

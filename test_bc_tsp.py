@@ -1,59 +1,64 @@
 from planner.map_utils import load_map
 from planner.graph_builder import grid_to_graph
-from planner.bc_tsp import solve_bc_tsp
-import matplotlib.pyplot as plt
 from planner.bc_tsp import solve_bc_tsp, load_config
-from PIL import Image
-
-
-
+import matplotlib.pyplot as plt
 
 def main():
-    map_file = "map.pgm"
-    yaml_file = "map.yaml"
-    config_file = "demo.yaml"   # <-- Replace with the config name you used
+    map_file = "grid_txt/map_paddedMatrix.txt"
+    config_file = "demo.yaml"
 
-    # Load map and grid
-    binary_grid, resolution, origin = load_map(map_file, yaml_file)
+    binary_grid, resolution, origin = load_map(map_file, config_file)
     graph = grid_to_graph(binary_grid, resolution)
 
-    # Run the planner
-    path = solve_bc_tsp(config_file, graph)
-
+    path, visited_pois = solve_bc_tsp(config_file, graph)
     print("\nFinal path to follow:")
     for step in path:
         print(step)
-    
-    print(f"\nCharge location: {config_file}")
+
+    # ✅ Validate charging location and POIs
     config = load_config(config_file)
-    binary_grid, resolution, origin = load_map(map_file, yaml_file)
 
     def check_valid(pt):
-        y, x = pt  # flipped!
+        y, x = pt  # flipped for row/col access
         return (
             0 <= y < binary_grid.shape[0] and
             0 <= x < binary_grid.shape[1] and
-            binary_grid[y][x] == 1
+            binary_grid[y][x] == 0
         )
 
     charge = tuple(config["robot"]["charge_locale"])
+    print(f"\nCharge location: {charge}")
     print(f"Is charge valid? {check_valid(charge)}")
 
-    for i, pt in enumerate(config["key_points"]):
+    poi_list = [tuple(p) for p in config["key_points"]]
+    for i, pt in enumerate(poi_list):
         print(f"POI {i+1} at {pt} valid? {check_valid(pt)}")
 
+    print("Binary grid shape:", binary_grid.shape)  # (rows, cols)
 
-    # Load map image for background
-    img = Image.open("map_padded.png")
 
-    plt.imshow(img, cmap='gray')
+    # Plot the binary map
+    plt.imshow(1 - binary_grid, cmap='gray')
 
-    # Flip to (x, y) format correctly for matplotlib
-    coords = [tuple(config["robot"]["charge_locale"])] + [tuple(p) for p in config["key_points"]]
-    px, py = zip(*[(x, y) for (y, x) in coords])  # flip for correct orientation
+    # Plot full path in light blue - no conversion needed, keep y,x as is
+    if path:
+        py_path, px_path = zip(*path)  # Already in y,x format
+        plt.plot(px_path, py_path, 'skyblue', linewidth=2, label="Path")
 
-    plt.plot(px, py, 'ro')  # x=cols, y=rows
-    plt.title("POIs Overlaid on Map")
+    # Plot POIs in red - no conversion needed
+    if visited_pois:
+        py_poi, px_poi = zip(*visited_pois)  # Already in y,x format
+        plt.scatter(px_poi, py_poi, c='red', s=50, label="Visited POIs")
+
+    # Plot charge station in green - charge is already in y,x format
+    charge_y, charge_x = charge
+    plt.scatter(charge_x, charge_y, c='green', s=80, marker='*', label="Charge Station")
+
+    plt.title("POIs on Binary Map")
+    plt.xlabel("X (cols)")
+    plt.ylabel("Y (rows)")
+    plt.legend()
+    plt.grid(True)
     plt.show()
 
 
