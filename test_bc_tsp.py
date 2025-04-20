@@ -68,8 +68,11 @@ def main():
 
 
     plt.imshow(1 - binary_grid, cmap='gray',
-            extent=(-charge[0], binary_grid.shape[1] - charge[0],
-                    binary_grid.shape[0] - charge[1], -charge[1]))
+        extent=(
+            -charge[0] - 0.5, binary_grid.shape[1] - charge[0] - 0.5,
+            binary_grid.shape[0] - charge[1] - 0.5, -charge[1] - 0.5
+        ))
+
 
 
     trip_colors = ['skyblue', 'orange', 'purple', 'lime', 'deepskyblue', 'salmon']
