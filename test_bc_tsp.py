@@ -38,7 +38,8 @@ def main():
 
     poi_list = [tuple(p) for p in config["key_points"]]
     for i, pt in enumerate(poi_list):
-        print(f"POI {i+1} at {pt} valid? {check_valid(pt)}")
+        rebased = to_relative(pt)
+        print(f"POI {i+1} at {pt} (rebased: {rebased}) valid? {check_valid(pt)}")
 
     print("Binary grid shape:", binary_grid.shape)  # (rows, cols)
 
