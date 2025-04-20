@@ -3,31 +3,38 @@ from planner.graph_builder import grid_to_graph
 from planner.bc_tsp import solve_bc_tsp, load_config
 import matplotlib.pyplot as plt
 
+
 def main():
     map_file = "grid_txt/map_paddedMatrix.txt"
     config_file = "demo.yaml"
 
-    binary_grid, resolution, origin = load_map(map_file, config_file)
+    binary_grid, resolution, charge = load_map(map_file, config_file)
     graph = grid_to_graph(binary_grid, resolution)
+
+    def to_relative(pt):
+            return (pt[0] - charge[0], pt[1] - charge[1])
+        
+    def check_valid(pt):
+            x, y = pt 
+            return (
+                0 <= y < binary_grid.shape[0] and
+                0 <= x < binary_grid.shape[1] and
+                binary_grid[y][x] == 0
+            )
 
     path, visited_pois = solve_bc_tsp(config_file, graph)
     print("\nFinal path to follow:")
     for step in path:
-        print(step)
+        print(to_relative(step))
 
     config = load_config(config_file)
 
-    def check_valid(pt):
-        x, y = pt 
-        return (
-            0 <= y < binary_grid.shape[0] and
-            0 <= x < binary_grid.shape[1] and
-            binary_grid[y][x] == 0
-        )
 
-    charge = tuple(config["robot"]["charge_locale"])
-    print(f"\nCharge location: {charge}")
-    print(f"Is charge valid? {check_valid(charge)}")
+    
+    # print(f"\nCharge location: {charge}")
+    # print(f"Is charge valid? {check_valid(charge)}")
+
+    
 
     poi_list = [tuple(p) for p in config["key_points"]]
     for i, pt in enumerate(poi_list):
@@ -59,7 +66,11 @@ def main():
 
 
 
-    plt.imshow(1 - binary_grid, cmap='gray')
+    plt.imshow(1 - binary_grid, cmap='gray',
+            extent=(-charge[0], binary_grid.shape[1] - charge[0],
+                    binary_grid.shape[0] - charge[1], -charge[1]))
+
+
     trip_colors = ['skyblue', 'orange', 'purple', 'lime', 'deepskyblue', 'salmon']
         
     for i, trip in enumerate(charging_trips):
@@ -67,21 +78,21 @@ def main():
         label = f"Trip {i+1}"
         
         # Get x,y coordinates for plotting
-        trip_x, trip_y = zip(*trip)
+        trip_x, trip_y = zip(*[to_relative(p) for p in trip])
         plt.plot(trip_x, trip_y, color=color, linewidth=2, label=label)
 
     # Plot visited POIs in red
     if visited_pois:
-        poi_x, poi_y = zip(*visited_pois)
+        poi_x, poi_y = zip(*[to_relative(p) for p in visited_pois])
         plt.scatter(poi_x, poi_y, c='red', s=50, label="Visited POIs")
 
     # Plot unreachable POIs in gray
     if unreachable_pois:
-        unreached_x, unreached_y = zip(*unreachable_pois)
+        unreached_x, unreached_y = zip(*[to_relative(p) for p in unreachable_pois])
         plt.scatter(unreached_x, unreached_y, c='silver', s=50, label="Unreachable POIs")
 
     # Plot charge station in green
-    charge_x, charge_y = charge
+    charge_x, charge_y = to_relative(charge)
     plt.scatter(charge_x, charge_y, c='green', s=80, marker='*', label="Charge Station")
 
     
