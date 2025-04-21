@@ -108,6 +108,8 @@ def main():
     plt.grid(True)
     plt.show()
 
+    # return rebased coordinates
+    path = [to_relative(p) for p in path]
     return path, visited_pois, charging_trips, unreachable_pois, charge
 
 
