@@ -1,0 +1,5 @@
+  File "/home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move/move.py", line 1
+    \# adapted from UGV given code and my old 1567 project
+     ^
+SyntaxError: unexpected character after line continuation character
+

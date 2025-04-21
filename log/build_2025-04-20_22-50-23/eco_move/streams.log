@@ -1,0 +1,29 @@
+[0.761s] Invoking command in '/home/ws/cs1699-EcoBot/maneuver/eco_move': PYTHONPATH=/home/ws/cs1699-EcoBot/build/eco_move/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/eco_move build --build-base /home/ws/cs1699-EcoBot/build/eco_move/build install --record /home/ws/cs1699-EcoBot/build/eco_move/install.log --single-version-externally-managed install_data
+[1.019s] running egg_info
+[1.019s] writing ../../build/eco_move/eco_move.egg-info/PKG-INFO
+[1.019s] writing dependency_links to ../../build/eco_move/eco_move.egg-info/dependency_links.txt
+[1.019s] writing entry points to ../../build/eco_move/eco_move.egg-info/entry_points.txt
+[1.019s] writing requirements to ../../build/eco_move/eco_move.egg-info/requires.txt
+[1.019s] writing top-level names to ../../build/eco_move/eco_move.egg-info/top_level.txt
+[1.020s] reading manifest file '../../build/eco_move/eco_move.egg-info/SOURCES.txt'
+[1.020s] writing manifest file '../../build/eco_move/eco_move.egg-info/SOURCES.txt'
+[1.020s] running build
+[1.020s] running build_py
+[1.020s] copying eco_move/move.py -> /home/ws/cs1699-EcoBot/build/eco_move/build/lib/eco_move
+[1.020s] running install
+[1.020s] running install_lib
+[1.020s] copying /home/ws/cs1699-EcoBot/build/eco_move/build/lib/eco_move/move.py -> /home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move
+[1.021s] byte-compiling /home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move/move.py to move.cpython-310.pyc
+[1.021s]   File "/home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move/move.py", line 47
+[1.021s]     turning_rad, distance_to_move = ugv_mover.calculate_angle_and_distance(>
+[1.021s]                                                                            ^
+[1.021s] SyntaxError: invalid syntax
+[1.021s] 
+[1.022s] running install_data
+[1.022s] running install_egg_info
+[1.023s] removing '/home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move-0.0.0-py3.10.egg-info' (and everything under it)
+[1.024s] Copying ../../build/eco_move/eco_move.egg-info to /home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move-0.0.0-py3.10.egg-info
+[1.024s] running install_scripts
+[1.058s] Installing move script to /home/ws/cs1699-EcoBot/install/eco_move/lib/eco_move
+[1.059s] writing list of installed files to '/home/ws/cs1699-EcoBot/build/eco_move/install.log'
+[1.096s] Invoked command in '/home/ws/cs1699-EcoBot/maneuver/eco_move' returned '0': PYTHONPATH=/home/ws/cs1699-EcoBot/build/eco_move/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/eco_move build --build-base /home/ws/cs1699-EcoBot/build/eco_move/build install --record /home/ws/cs1699-EcoBot/build/eco_move/install.log --single-version-externally-managed install_data

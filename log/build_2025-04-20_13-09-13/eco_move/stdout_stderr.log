@@ -1,0 +1,31 @@
+running egg_info
+creating ../../build/eco_move/eco_move.egg-info
+writing ../../build/eco_move/eco_move.egg-info/PKG-INFO
+writing dependency_links to ../../build/eco_move/eco_move.egg-info/dependency_links.txt
+writing entry points to ../../build/eco_move/eco_move.egg-info/entry_points.txt
+writing requirements to ../../build/eco_move/eco_move.egg-info/requires.txt
+writing top-level names to ../../build/eco_move/eco_move.egg-info/top_level.txt
+writing manifest file '../../build/eco_move/eco_move.egg-info/SOURCES.txt'
+reading manifest file '../../build/eco_move/eco_move.egg-info/SOURCES.txt'
+writing manifest file '../../build/eco_move/eco_move.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/ws/cs1699-EcoBot/build/eco_move/build
+creating /home/ws/cs1699-EcoBot/build/eco_move/build/lib
+creating /home/ws/cs1699-EcoBot/build/eco_move/build/lib/eco_move
+copying eco_move/__init__.py -> /home/ws/cs1699-EcoBot/build/eco_move/build/lib/eco_move
+running install
+running install_lib
+creating /home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move
+copying /home/ws/cs1699-EcoBot/build/eco_move/build/lib/eco_move/__init__.py -> /home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move
+byte-compiling /home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/ws/cs1699-EcoBot/install/eco_move/share/ament_index
+creating /home/ws/cs1699-EcoBot/install/eco_move/share/ament_index/resource_index
+creating /home/ws/cs1699-EcoBot/install/eco_move/share/ament_index/resource_index/packages
+copying resource/eco_move -> /home/ws/cs1699-EcoBot/install/eco_move/share/ament_index/resource_index/packages
+copying package.xml -> /home/ws/cs1699-EcoBot/install/eco_move/share/eco_move
+running install_egg_info
+Copying ../../build/eco_move/eco_move.egg-info to /home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move-0.0.0-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/ws/cs1699-EcoBot/build/eco_move/install.log'
