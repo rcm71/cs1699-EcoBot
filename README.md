@@ -23,3 +23,5 @@
    ![Gazebo Alignment Image](alignment.png)
 9. In another terminal window, open up the container again with ```. ros_humble.sh```
 10. Now run the rover movement software with ```ros2 run eco_move move.py```
+
+A demo of the rover moving in the base environment can be found at: https://www.youtube.com/watch?v=LqG55MnkGIw&t=38s&ab_channel=RoryMcCann
