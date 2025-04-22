@@ -20,6 +20,6 @@
 5. Build the ros2 package with ```colcon build``` and ```source install/setup.bash```
 6. Open up Gazebo with ```ros2 launch ugv_gazebo bringup.launch.py```
 7. Once in Gazebo, you must align the world using the rotate and movement tools in the top toolbar to algin with this image:
-   ![Gazebo Alignment Image](images/alignment.png)
+   ![Gazebo Alignment Image](alignment.png)
 9. In another terminal window, open up the container again with ```. ros_humble.sh```
 10. Now run the rover movement software with ```ros2 run eco_move move.py```
