@@ -24,9 +24,9 @@ def main():
             )
 
     path, visited_pois = solve_bc_tsp(config_file, graph)
-    print("\nFinal path to follow:")
-    for step in path:
-        print(to_relative(step))
+    # print("\nFinal path to follow:")
+    # for step in path:
+        # print(step) # not rebased
 
     config = load_config(config_file)
 
@@ -109,8 +109,15 @@ def main():
     plt.grid(True)
     plt.show()
 
-    return path, visited_pois, charging_trips, unreachable_pois, charge
+    # return rebased coordinates
+    path = [to_relative(p) for p in path]
+    print("\nFinal path to follow:")
+    for step in path:
+        print(step) # rebased
 
+
+    return path, visited_pois, charging_trips, unreachable_pois, charge
+    
 
 if __name__ == "__main__":
     main()
