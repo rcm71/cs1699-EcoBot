@@ -3,9 +3,13 @@ TO CONVERT IMAGE INTO GRID:
 2. run ConvertMap.ipynb
 3. result will be saved in /converted_image and grid_txt
 
-TO GET REBASED COORDINATES:
+TO GET VISUALISATION OF REBASED COORDINATES (optional):
 1. replace the input filename with your grid.txt file name
 2. run Coodinates.ipynb and click on one of those blue dots as your new origin
+
+TO GET 2-D PATH PLANNING VISUALISATION:
+1. run python user_input.py and follow prompts to enter robot data, points of interest, charging station, etc. 
+2. run python test_bc_tsp.py.
 
 ###TODO###
 
