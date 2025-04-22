@@ -11,7 +11,7 @@
 1. run python user_input.py and follow prompts to enter robot data, points of interest, charging station, etc. 
 2. run python test_bc_tsp.py.
 
-### TO RUN GAZEBO SIMULATION
+### TO RUN GAZEBO SIMULATION USING BASE ENVIRONMENT (final_path.txt)
 1. You first need to install VirtualBox and use the image provided by waveshare:
    https://www.waveshare.com/wiki/UGV_Rover_PI_ROS2_11._Gazebo_Simulation_debugging
 2. Once in the virtual machine, you must follow steps on above page to get into docker container, ```xhost +``` and ```. ros_humble.sh```
