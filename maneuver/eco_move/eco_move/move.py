@@ -17,8 +17,9 @@ msg = ""
 A_SMOOTHER = 0.04
 L_SMOOTHER = 0.008
 # max speed, hard 1 for now. maybe a bit more efficent to 
-A_SPEED = 1.0
-L_SPEED = 1.0
+
+A_SPEED = .4
+L_SPEED = .4
 # robot current position, we get these from robot odometry
 
 class ugv_Move(Node):
@@ -46,7 +47,8 @@ class ugv_Move(Node):
         for coord in self.coord_list:
             turning_rad, distance_to_move = self.calculate_angle_and_distance(coord)
         # turn to coord
-            while abs(self.yaw - turning_rad) > .10:
+
+            while abs(self.yaw - turning_rad) > .15:
                 turning_rad, distance_to_move = self.calculate_angle_and_distance(coord)
                 self.turn_the_robot(turning_rad)
                 self.pub.publish(self.twist)
@@ -64,6 +66,11 @@ class ugv_Move(Node):
                 time.sleep(0.1)
                 print(f"goal:{coord}\tx:{self.x}\ty:{self.y}")
             print("passed move")
+
+            if coord_count in self.wait_list:
+                self.twist.linear.x = 0.0
+                self.twist.angular.z = 0.0
+                self.pub.publish(self.twist)
             self.twist.linear.x = 0.0
             coord_count += 1
 
@@ -79,7 +86,7 @@ class ugv_Move(Node):
                 splat = line.strip("( )")
                 x_str, y_str = splat.split(",")
                 x1 = -1 * float(x_str.strip()) / 4.0
-                y1 = float(y_str[:-1].strip(")")) / 4.0
+                y1 = float(y_str[:-1].strip("). ")) / 4.0
                 self.coord_list.append((x1,y1))
                 if len(line.split("()")) > 1:
                     self.wait_list.append(line_count)
@@ -105,17 +112,19 @@ class ugv_Move(Node):
     
     def move_the_robot(self, distance):
         if distance > .05:
-            self.twist.linear.x = .2
+
+            self.twist.linear.x = L_SPEED
         else:
             self.twist.linear.x = 0.0
 
     def turn_the_robot(self, turning_degree_in_rad):
         if 	self.yaw < turning_degree_in_rad:
-            self.twist.angular.z = 0.3
+
+            self.twist.angular.z = A_SPEED
         else:
-            self.twist.angular.z = -0.3
+            self.twist.angular.z = -A_SPEED
         
-        if abs(self.yaw - turning_degree_in_rad) < .05:
+        if abs(self.yaw - turning_degree_in_rad) < .15:
             self.twist.angular.z = 0.0
 
     def calculate_angle_and_distance(self, coordinate):
@@ -136,43 +145,7 @@ def main():
     # initialize our mover
     ugv_mover = ugv_Move("path_scanner")
     rclpy.spin(ugv_mover)
-    coord_list = []
-    wait_list = []
-    print("we pass")    # our path is predetermined, saved in a file of (x,y) coords
-    # for nodes where we stop and scan, any other fun characters in there
-    # to denote a stoppage
-    # for every coord in the list, go to it!
-    # basically turns then moves, always straight line
-    # if the turns arent too sharp (aka not big gap)
-    # it should be fairly smooth
-    coord_count = 0
-    for coord in coord_list:
-        turning_rad, distance_to_move = ugv_mover.calculate_angle_and_distance(coord)
-        # turn to coord
-        while abs(ugv_mover.yaw - turning_rad) > .05:
-            turning_rad, distance_to_move = ugv_mover.calculate_angle_and_distance(coord)
-            ugv_mover.turn_the_robot(turning_rad)
-            ugv_mover.pub.publish(ugv_mover.twist)
-            time.sleep(0.1)
-            print(f"x:{ugv_mover.x}\ty:{ugv_mover.y}\tyaw:{ugv_mover.yaw}")
-            # SLEEEEP
-        # travel to coord
-        print("passed turn")
-        while distance_to_move > 0.03:
-            turning_rad, distance_to_move = ugv_mover.calculate_angle_and_distance(coord)
-            # may need to adjust on the fly
-            ugv_mover.turn_the_robot(turning_rad)
-            ugv_mover.move_the_robot(distance_to_move)
-            ugv_mover.pub.publish(ugv_mover.twist)
-            time.sleep(0.1)
-            print(f"x:{ugv_mover.x}\ty:{ugv_mover.y}\tyaw:{ugv_mover.yaw}")
-        print("passed move")
-        ugv_mover.twist.linear.x = 0.0
-        coord_count += 1
-    
-    # end of coord_list, stop bot
-    ugv_mover.twist.linear.x = 0.0
-    ugv_mover.twist.angular.z = 0.0
+
     ugv_mover.pub.publish(ugv_mover.twist)
     # destroy build destroy
     ugv_mover.destroy_node()
