@@ -17,6 +17,7 @@ msg = ""
 A_SMOOTHER = 0.04
 L_SMOOTHER = 0.008
 # max speed, hard 1 for now. maybe a bit more efficent to 
+
 A_SPEED = .4
 L_SPEED = .4
 # robot current position, we get these from robot odometry
@@ -46,6 +47,7 @@ class ugv_Move(Node):
         for coord in self.coord_list:
             turning_rad, distance_to_move = self.calculate_angle_and_distance(coord)
         # turn to coord
+
             while abs(self.yaw - turning_rad) > .15:
                 turning_rad, distance_to_move = self.calculate_angle_and_distance(coord)
                 self.turn_the_robot(turning_rad)
@@ -64,6 +66,7 @@ class ugv_Move(Node):
                 time.sleep(0.1)
                 print(f"goal:{coord}\tx:{self.x}\ty:{self.y}")
             print("passed move")
+
             if coord_count in self.wait_list:
                 self.twist.linear.x = 0.0
                 self.twist.angular.z = 0.0
@@ -109,12 +112,14 @@ class ugv_Move(Node):
     
     def move_the_robot(self, distance):
         if distance > .05:
+
             self.twist.linear.x = L_SPEED
         else:
             self.twist.linear.x = 0.0
 
     def turn_the_robot(self, turning_degree_in_rad):
         if 	self.yaw < turning_degree_in_rad:
+
             self.twist.angular.z = A_SPEED
         else:
             self.twist.angular.z = -A_SPEED

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from planner.map_utils import load_map
 from planner.graph_builder import grid_to_graph
 from planner.bc_tsp import solve_bc_tsp, load_config

@@ -1,0 +1,5 @@
+  File "/home/ws/cs1699-EcoBot/install/eco_move/lib/python3.10/site-packages/eco_move/move.py", line 47
+    turning_rad, distance_to_move = ugv_mover.calculate_angle_and_distance(>
+                                                                           ^
+SyntaxError: invalid syntax
+
