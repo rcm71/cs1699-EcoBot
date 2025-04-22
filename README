@@ -1,4 +1,14 @@
+TO CONVERT IMAGE INTO GRID:
+1. place image in raw_image folder
+2. run ConvertMap.ipynb
+3. result will be saved in /converted_image and grid_txt
+
+TO GET REBASED COORDINATES:
+1. replace the input filename with your grid.txt file name
+2. run Coodinates.ipynb and click on one of those blue dots as your new origin
+
 ###TODO###
 
 - Create user interface for information about sensors, charge station
 - 
+
